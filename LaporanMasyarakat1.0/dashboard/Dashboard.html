@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>LaporMas!</title>
+    <link rel="icon" type="image/x-icon" href="iconlogo.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="LaporMas!">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+    <meta name="description" content="Portal Laporan Pengaduan Online di Komplek Perumahan" />
+    <meta name="author" content="Team 5 TRPL Malam 1A">
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="LaporMas!" />
+    <meta property="og:description" content="Portal Laporan Pengaduan Online di Komplek Perumahan" />
+    <meta property="og:image" content="image.png" />
+    <meta property="og:url" content="Dashboard.html" />
+
+    <meta name="Author" content="Team 5 TRPL Malam 1A" />
+    <link rel="canonical" href="Dashboard.html" />
+    <link rel="image_src" href="image2.png" />
+    <link rel="home" href="Dashboard.html" />
+
+    <meta name="theme-color" content="#000000">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#000000">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#000000">
+    <meta name="viewport" content="width=device-width, initial-scale = 1.0, user-scalable = no">
+
+    <link rel="stylesheet" href="cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&family=Karla:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="lapormas/css/app.css" rel="stylesheet">
+    <link href="lapormas/css/custom.css" rel="stylesheet">
+    <!-- select2 -->
+    <link href="lapormas/plugins/select2/select2.min.css" rel="stylesheet"/>
+    <!-- stepper -->
+    <link rel="stylesheet" href="lapormas/plugins/stepper/bs-stepper.min.css">
+    <!-- sweetalert -->
+    <link href="lapormas/plugins/sweetalert/sweetalert2.min.css" rel="stylesheet">
+
+        <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FDVB6JR4TJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-FDVB6JR4TJ');
+    </script>
+    </head>
+
+    <style>
+        .hasImage:hover section {
+            background-color: rgba(5, 5, 5, 0.4);
+        }
+
+        .hasImage:hover button:hover {
+            background: rgba(5, 5, 5, 0.45);
+        }
+
+        #overlay p, #overlay i {
+            opacity: 0;
+        }
+
+        #overlay.draggedover {
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+        #overlay.draggedover p,
+        #overlay.draggedover i {
+            opacity: 1;
+        }
+
+        .group:hover .group-hover\:text-blue-800 {
+            color: hsl(41, 94%, 50%);
+        }
+    </style>
+
+<style type="text/css">
+    .invalid-feedback {
+        display: none;
+        width: 100%;
+        margin-top: .25rem;
+        font-size: 80%;
+        color: hsl(41, 94%, 50%);
+        font-weight: 700;
+    }
+
+    .bg-loader {
+        display: none;
+        position: fixed;
+        z-index: 99999;
+        margin: 0;
+        left: 0;
+        background-color: #000000b3;
+        width: 100%;
+        height: 100%;
+        background-attachment: fixed;
+    }
+
+    .loader {
+        border: 10px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 10px solid #555;
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+        position: fixed;
+        z-index: 9999;
+        top: 50%;
+        left: 50%;
+        margin-top: -50px;
+        margin-left: -50px;
+    }
+
+    @keyframes  spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .toast {
+        opacity: 1 !important;
+    }
+
+    .select2-container .select2-selection--single {
+        height: 40px !important;
+    }
+
+    .select2-container .select2-selection--single .select2-selection__rendered {
+        padding: 5px 0 0 12px !important;
+    }
+
+    .select2-container .select2-selection--single .select2-selection__arrow {
+        height: 40px !important;
+    }
+
+    .select2-container .select2-selection--single .select2-selection__clear {
+        height: 38px !important;
+    }
+
+    </style>
+
+<body class="overflow-x-hidden sm:overflow-auto font-inter" id="bodyDiv">
+            <header style="background:hsl(41, 94%, 50%); color:white; padding:10px 20px;">
+    <nav class="sm:flex sm:justify-between sm:items-center sm:inline-block sm:h-16 sm:py-3 sm:px-2 flex h-20 bg-white text-red-600 font-poppins shadow-md">
+        <div class="flex justify-between w-full">
+            <div class="flex items-center flex-1">
+                <div class="px-4 self-center sm:hidden flex-none">
+                    <button class="p-2 bg-transparent" type="button" id="burger">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="lg:ml-14 sm:ml-8 flex-1">
+                    <a href="Dashboard.html">
+                        <img class="sm:w-8 w-10 inline-block" src="logo2.png" alt="logo">
+                        <img class="sm:h-6 h-8 inline-block" src="logo-text.png" alt="logo">
+                    </a>
+                </div>
+            </div>
+
+            <!-- Notif and Profile Button for MOBILE -->
+            <div class="sm:hidden block flex items-center flex-initial w-1/3">
+                                <a href="login.html" class="mx-3 my-2 font-inter px-3 py-1 border sm:border-red-700 sm:bg-white-400 sm:text-current rounded-md text-white border-white text-center block sm:inline">
+                    <i class="fas fa-user-circle mr-1"></i>
+                    <span class="text-sm font-semibold">Login / Contact Admin</span>
+                </a>
+                            </div>
+        </div>
+
+                <div class="lg:mr-14 sm:mr-8 sm:inline sm:static sm:pt-0 sm:mt-0 sm:p-0 block absolute -left-[300px] w-[300px] h-full sm:h-auto sm:w-auto mt-20 py-4 px-6 z-[200] sm:items-center items-start bg-red-600 sm:bg-transparent flex flex-col sm:flex-none" id="menu">
+            
+            <a href="jelajah" class="uppercase sm:normal-case lg:mx-3 sm:mx-0 px-2 py-1.5 text-white sm:text-red-600 text-center block sm:inline sm:hover:bg-red-50 sm:hover:font-semibold">
+                <span class="sm:hidden text-white pr-2"><i class="fas fa-search"></i></span>
+                Jelajah Aduan
+            </a>
+
+                        <a href="tentang" class="uppercase sm:normal-case lg:mx-3 sm:mx-0 px-2 py-1.5 text-white sm:text-red-600 text-center block sm:inline sm:hover:bg-red-50 sm:hover:font-semibold">
+                <span class="sm:hidden text-white pr-2"><i class="fas fa-info-circle"></i></span>
+                Tentang LaporMas
+            </a>
+            
+                        <a href="login.html" class="mx-3 my-2 font-inter px-3 py-1 border sm:border-red-700 sm:bg-white-400 sm:text-current rounded-md text-white border-white text-center block sm:inline">
+                <i class="fas fa-user-circle mr-1"></i>
+                <span class="text-sm font-semibold">Login / Contact Admin</span>
+            </a>
+                    </div>
+            </nav>
+</header>    
+    <main style="min-height: 95vh">
+        <!-- Dynamic Content Section -->
+            <!-- Form Section -->
+    <div class="grid grid-cols-3 my-14 font-inter">
+        <!-- hidden divider -->
+        <div class="sm:hidden absolute top-0 -z-20 h-2/5 w-screen bg-white">
+        </div>
+
+        <!-- background image red rectangle -->
+        <div class="absolute top-0 sm:bottom-[20%] left-0 -z-20">
+            <img src="bg-02.png" class="h-[42rem] sm:h-auto" alt="background image">
+        </div>
+
+        <!-- title text section -->
+        <div class="col-span-3 flex items-center justify-center">
+            <p class="text-center font-rubik sm:mb-16 sm:p-0 p-4">
+                <span class="sm:text-3xl text-2xl italic text-red-700 font-semibold">LaporMas!</span><br>
+                <span
+                    class="text-xl font-light font-poppins">Portal Laporan Pengaduan Online di Komplek Perumahan</span>
+            </p>
+        </div>
+
+        <!-- lacak aduan form section -->
+        <div class="col-span-3 mb-10 flex items-center justify-center">
+            <div class="lg:w-3/5 sm:4/5 w-5/6">
+                <p class="text-md font-medium lg:text-left text-center text-gray-800 mb-3">
+                    Sudah pernah melaporkan di kanal lain? Cek kode aduan di sini.
+                </p>
+                <form
+                    class="w-full flex flex-col lg:flex-row sm:flex-row items-center justify-center lg:space-x-2 sm:space-x-3 sm:space-y-0 space-y-2"
+                    action="jelajah" method="GET">
+                    <input type="text" name="search" id="search" class="lg:flex-1 lg:px-4 sm:flex-1 sm:px-4 py-3 block bg-gray-100 rounded-lg text-gray-900 border-2 border-gray-200 placeholder-gray-500 focus:ring-red-500 focus:border-red-500 focus:outline-none"
+                           placeholder="Contoh : LGWA12345678">
+                    <button type="submit"
+                            class="lg:flex-none lg:px-11 lg:w-auto sm:flex-none sm:px-4 sm:w-auto w-2/4 py-3 block bg-red-600 rounded-lg text-white border-2 border-transparent hover:bg-red-700"
+                            data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+                            aria-controls="collapseExample">
+                        <i class="fas fa-search mr-1"></i>
+                        <span class="font-medium tracking-wide">Lacak Aduan</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form Aduan -->
+    <div class="col-span-3 flex items-center justify-center sm:m-0 mb-8">
+
+        <!-- aduan form section -->
+        <div class="bg-white lg:w-3/5 sm:w-4/5 w-11/12 font-karla rounded-lg shadow-xl border border-gray-200 font-inter">
+            <div class="w-full sm:px-16 px-6 pb-5 pt-8">
+                <p class="text-red-600 text-center font-semibold text-lg mb-3">Form Aduan</p>
+                <div class="bs-stepper flex flex-col justify-center items-center">
+                    <div class="bs-stepper-header sm:w-4/5 w-full" role="tablist">
+                        <!-- your steps here -->
+                        <div class="step" data-target="#stepper-step1">
+                            <button type="button" class="step-trigger" role="tab" aria-controls="stepper-step1"
+                                    id="stepper-step1-trigger">
+                                    <span class="bs-stepper-circle flex justify-center items-center"
+                                          style="background-color: rgb(236, 160, 18)"><i
+                                            class="fas fa-file-alt text-sm"></i></span>
+                                <span class="bs-stepper-label m-0">Aduan</span>
+                            </button>
+                        </div>
+                                                    <div class="line"></div>
+                            <div class="step" data-target="#stepper-step2">
+                                <button type="button" class="step-trigger disabled" role="tab"
+                                        aria-controls="stepper-step2"
+                                        id="stepper-step2-trigger">
+                                    <span class="bs-stepper-circle flex justify-center items-center"
+                                          style="background-color: rgb(236, 160, 18)"><i
+                                            class="fas fa-user-circle text-sm"></i></span>
+                                    <span class="bs-stepper-label m-0">Data Diri</span>
+                                </button>
+                            </div>
+                                                <div class="line"></div>
+                        <div class="step" data-target="#stepper-step3">
+                            <button type="button" class="step-trigger disabled" role="tab" aria-controls="stepper-step3"
+                                    id="stepper-step3-trigger">
+                                    <span class="bs-stepper-circle flex justify-center items-center"
+                                          style="background-color: rgb(236, 160, 18)"><i
+                                            class="fas fa-check-square text-sm"></i></span>
+                                <span class="bs-stepper-label m-0">Kebijakan</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="bs-stepper-content w-full">
+                        <!-- your steps content here -->
+                        <div id="stepper-step1" class="content" role="tabpanel"
+                             aria-labelledby="stepper-step1-trigger">
+                            <form class="space-y-6" method="POST" enctype="multipart/form-data"
+                                  id="form-step1">
+                                <input type="hidden" name="_token" value="JUXRrTY0HxEpqIhMHqvZKfBNvKvoKIYuRPeXsTiw">                                <div>
+                                    <label for="file-upload" class="text-md font-medium">Gambar Aduan</label>
+                                    <main class="container mx-auto max-w-screen-lg">
+                                        <!-- file upload modal -->
+                                        <article aria-label="File Upload Modal"
+                                                 class="relative h-full flex flex-col bg-white rounded-md"
+                                                 ondrop="dropHandler(event);" ondragover="dragOverHandler(event);"
+                                                 ondragleave="dragLeaveHandler(event);"
+                                                 ondragenter="dragEnterHandler(event);">
+                                            <!-- overlay -->
+                                            <div id="overlay"
+                                                 class="w-full h-full absolute top-0 left-0 pointer-events-none z-50 flex flex-col items-center justify-center rounded-md">
+                                                <i>
+                                                    <svg class="fill-current w-12 h-12 mb-3 text-red-600"
+                                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                         viewBox="0 0 24 24">
+                                                        <path
+                                                            d="M19.479 10.092c-.212-3.951-3.473-7.092-7.479-7.092-4.005 0-7.267 3.141-7.479 7.092-2.57.463-4.521 2.706-4.521 5.408 0 3.037 2.463 5.5 5.5 5.5h13c3.037 0 5.5-2.463 5.5-5.5 0-2.702-1.951-4.945-4.521-5.408zm-7.479-1.092l4 4h-3v4h-2v-4h-3l4-4z"/>
+                                                    </svg>
+                                                </i>
+                                                <p class="text-lg text-red-600">Drop files to upload</p>
+                                            </div>
+
+                                            <!-- scroll area -->
+                                            <section class="h-full w-full h-full flex flex-col">
+                                                <header
+                                                    class="border-dashed border-2 border-red-200 flex flex-col justify-center items-center rounded-md h-36">
+                                                    <ul id="gallery"
+                                                        class="flex flex-1 flex-wrap -m-1 w-full items-center px-4 cursor-pointer">
+                                                        <li id="empty"
+                                                            class="h-full w-full text-center flex flex-col items-center justify-center items-center">
+                                                            <svg class="mx-auto h-12 w-12 text-red-700"
+                                                                 stroke="currentColor"
+                                                                 fill="none" viewBox="0 0 48 48" aria-hidden="True">
+                                                                <path
+                                                                    d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                                                                    stroke-width="2" stroke-linecap="round"
+                                                                    stroke-linejoin="round"/>
+                                                            </svg>
+                                                            <p class="font-normal text-gray-900 flex flex-wrap justify-center">
+                                                                <span><span class="text-red-600 font-medium">Upload a file</span> or drag and drop</span>
+                                                            </p>
+                                                            <p class="font-normal text-sm text-gray-500 flex flex-wrap justify-center">
+                                                                <span>JPEG, JPG, PNG (5MB, Maksimal 3 Gambar)</span>
+                                                            </p>
+                                                        </li>
+                                                    </ul>
+                                                    <input id="hidden-input" multiple name="hidden-input[]" type="file"
+                                                           accept="image/*"
+                                                           class="sr-only">
+                                                </header>
+                                            </section>
+
+                                            <!-- sticky footer -->
+                                        </article>
+                                    </main>
+
+                                    <template id="image-template">
+                                        <li class="block p-1 w-1/3 h-28">
+                                            <article tabindex="0"
+                                                     class="group hasImage w-full h-full rounded-md focus:outline-none focus:shadow-outline bg-gray-100 cursor-pointer relative text-transparent hover:text-white shadow-sm">
+                                                <img alt="upload preview"
+                                                     class="img-preview w-full h-full sticky object-cover rounded-md bg-fixed"/>
+
+                                                <section
+                                                    class="flex flex-col rounded-md text-xs break-words w-full h-full z-20 absolute top-0 py-2 px-3">
+                                                    <h1 class="flex-1"></h1>
+                                                    <div class="flex">
+                                                        <span class="p-1">
+                                                        <i>
+                                                          <svg class="fill-current w-4 h-4 ml-auto pt-"
+                                                               xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                               viewBox="0 0 24 24">
+                                                            <path
+                                                                d="M5 8.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5zm9 .5l-2.519 4-2.481-1.96-4 5.96h14l-5-8zm8-4v14h-20v-14h20zm2-2h-24v18h24v-18z"/>
+                                                          </svg>
+                                                        </i>
+                                                        </span>
+                                                        <p class="p-1 size text-xs"></p>
+                                                        <button
+                                                            class="delete ml-auto focus:outline-none hover:bg-gray-300 p-1 rounded-md">
+                                                            <svg
+                                                                class="pointer-events-none fill-current w-4 h-4 ml-auto"
+                                                                xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24">
+                                                                <path class="pointer-events-none"
+                                                                      d="M3 6l3 18h12l3-18h-18zm19-4v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.316c0 .901.73 2 1.631 2h5.711z"/>
+                                                            </svg>
+                                                        </button>
+                                                    </div>
+                                                </section>
+                                            </article>
+                                        </li>
+                                    </template>
+
+                                    <template id="add-image">
+                                        <li class="block p-1 w-1/3 h-28"
+                                            id="button">
+                                            <button
+                                                class="w-full h-full rounded-md focus:outline-none focus:shadow-outline bg-gray-200 text-gray-900 hover:bg-gray-300 cursor-pointer relative shadow-sm">
+                                                <span>Add Image</span></button>
+                                        </li>
+                                    </template>
+                                    <div id="file-upload-invalid" class="invalid-feedback"></div>
+                                </div>
+                                <div>
+                                    <label for="aduan" class="text-md font-medium">Isi Aduan *</label>
+                                    <textarea id="aduan" name="aduan" rows="5"
+                                              class="rounded-md w-full px-4 py-3 border-2 border-gray-200 placeholder-gray-400 text-gray-700 focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm"
+                                              placeholder="Masukkan isi aduan dan lokasi/alamat yang ingin dilaporkan, dengan lengkap dan jelas."></textarea>
+                                    <div id="aduan-invalid" class="invalid-feedback"></div>
+                                </div>
+
+                                <div>
+                                    <label for="lokasi" class="text-md font-medium">Lokasi Aduan *</label>
+                                    
+                                    <select
+                                        class="appearance-none rounded-md relative block w-full px-4 py-3 bg-slate-100 border border-slate-100 placeholder-gray-400 text-gray-700 rounded-b-md focus:outline-none sm:text-sm"
+                                        name="lokasi" id="lokasi">
+                                        <option></option>
+                                    </select>
+                                    <div id="lokasi-invalid" class="invalid-feedback"></div>
+                                    <div id="geolocation" class="invalid-feedback"></div>
+                                </div>
+
+                                <div>
+                                    <label for="jenis" class="text-md font-medium">Jenis Aduan *</label>
+                                    <select
+                                        class="appearance-none rounded-md relative block w-full px-4 py-3 bg-slate-100 border border-slate-100 placeholder-gray-400 text-gray-700 rounded-b-md focus:outline-none sm:text-sm"
+                                        name="jenis" id="jenis">
+                                        <option value="1">Public</option>
+                                        <option value="0">Private</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <button id="btn-step1" type="submit"
+                                            class="w-full py-3 border border-transparent text-sm font-medium rounded-lg text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" onclick="getlocation()">
+                                        Selanjutnya >
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                                                    <div id="stepper-step2" class="content" role="tabpanel"
+                                 aria-labelledby="stepper-step2-trigger">
+                                <form class="mt-4 space-y-8" id="form-step2"
+                                      method="POST">
+                                    <input type="hidden" name="_token" value="JUXRrTY0HxEpqIhMHqvZKfBNvKvoKIYuRPeXsTiw">                                                                            <div>
+                                            <p class="text-gray-700 text-xs">
+                                                <span>Masukkan data diri untuk pelaporan aduan, data akan langsung dibuat menjadi user baru.</span><br>
+                                                <span>Apabila anda sudah memiliki akun, silahkan </span>
+                                                <span class="text-red-600"><a href="/login">login akun</a></span>
+                                            </p>
+                                        </div>
+                                                                        <div>
+                                        <label for="phone" class="block text-sm font-medium">Nomor Handphone *</label>
+                                        <div class="flex items-center py-2">
+                                            <input id="phone" name="phone" type="phone"
+                                                   class="appearance-none rounded-md relative block w-full px-3 py-2 bg-gray-100 border border-gray-200 placeholder-gray-400 text-gray-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                                   placeholder="Masukkan nomor handphone"
+                                                   value="" ></input>
+                                            <button
+                                                class="flex-shrink-0 bg-red-600 hover:bg-red-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
+                                                type="button" id="send-otp">
+                                                Kirim Kode OTP
+                                            </button>
+                                        </div>
+                                        <div id="phone-invalid" class="invalid-feedback"></div>
+                                    </div>
+                                    <div>
+                                        <label for="otp" class="block text-sm font-medium mt-4">Kode OTP *</label>
+                                        <input id="otp" name="otp" type="text"
+                                               class="appearance-none rounded-md relative block w-full px-3 py-2 bg-gray-100 border border-gray-200 placeholder-gray-400 text-gray-700 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                               placeholder="Masukkan Kode OTP">
+                                        <div id="otp-invalid" class="invalid-feedback"></div>
+                                    </div>
+                                    <div>
+                                        <label for="name" class="block text-sm font-medium mt-4">Nama Sesuai KTP *</label>
+                                        <input id="name" name="name" type="text"
+                                               class="appearance-none rounded-md relative block w-full px-3 py-2 bg-gray-100 border border-gray-200 placeholder-gray-400 text-gray-700 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                               placeholder="Masukkan nama sesuai KTP"
+                                               value="" >
+                                        <div id="name-invalid" class="invalid-feedback"></div>
+                                    </div>
+                                    <div>
+                                        <label for="email" class="block text-sm font-medium mt-4">Email
+                                            (Optional)</label>
+                                        <input id="email" name="email" type="email"
+                                               class="appearance-none rounded-md relative block w-full px-3 py-2 bg-gray-100 border border-gray-200 placeholder-gray-400 text-gray-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                               placeholder="Masukkan email"
+                                               value="" ></input>
+                                        <div id="email-invalid" class="invalid-feedback"></div>
+                                    </div>
+                                                                            <div>
+                                            <label for="password"
+                                                   class="block text-sm font-medium mt-4">Password *</label>
+                                            <input id="password" name="password" type="password"
+                                                   class="appearance-none rounded-md relative block w-full px-3 py-2 bg-gray-100 border border-gray-200 placeholder-gray-400 text-gray-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                                   placeholder="Masukkan password"></input>
+                                            <div id="password-invalid" class="invalid-feedback"></div>
+                                        </div>
+                                        <div>
+                                            <label for="password" class="block text-sm font-medium mt-4">Ulangi
+                                                Password *</label>
+                                            <input id="password_confirmation" name="password_confirmation"
+                                                   type="password"
+                                                   class="appearance-none rounded-md relative block w-full px-3 py-2 bg-gray-100 border border-gray-200 placeholder-gray-400 text-gray-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                                   placeholder="Ulangi masukkan password"></input>
+                                            <div id="password_confirmation-invalid" class="invalid-feedback"></div>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="policy" name="policy" class="text-red-600">
+                                            <label for="policy" class="text-sm"> Saya Setuju dengan Syarat & Ketentuan
+                                                Laporgub.</label>
+                                            <div id="policy-invalid" class="invalid-feedback"></div>
+                                        </div>
+                                    
+
+                                                                            <div class="flex justify-center mt-10 text-sm">
+                                            <p>
+                                                <span>Sudah punya akun Laporgub? Silakan </span>
+                                                <span class="text-red-600"><a href="/login">login akun</a></span>
+                                            </p>
+                                        </div>
+                                    
+                                    <div id="btn-step2" class="flex items-center justify-center bg-white mt-6">
+                                        <button type="submit" type="submit"
+                                                class="w-full py-3 border border-transparent text-sm font-medium rounded-lg text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                                            Selanjutnya >
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                                                <div id="stepper-step3" class="content" role="tabpanel"
+                             aria-labelledby="stepper-step3-trigger">
+                            <form class="mt-4" id="form-step3"
+                                  method="POST">
+                                <input type="hidden" name="_token" value="JUXRrTY0HxEpqIhMHqvZKfBNvKvoKIYuRPeXsTiw">                                <input type="hidden" name="latitude">
+                                <input type="hidden" name="longitude">
+                                <div class="bg-gray-100 space-y-3 mb-6 py-5 px-6 text-sm">
+                                    <div>
+                                        <p class="text-gray-400">Isi Aduan</p>
+                                        <p id="aduan-review" class="text-gray-900 font-medium">
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-400">Jenis Aduan</p>
+                                        <p id="jenis-review" class="text-gray-900 font-medium">
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-400">Lokasi</p>
+                                        <p id="lokasi-review" class="text-gray-900 font-medium">
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-400">Pelapor</p>
+                                        <p id="pelapor-review"
+                                           class="text-gray-900 font-medium"></p>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-400">Lampiran</p>
+                                        <div id="lampiran-review" class="flex space-x-2 px-2 pt-5"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="captcha" class="text-md font-medium">Captcha *</label>
+                                    <div class="grid grid-cols-2 gap-0 mt-1">
+                                        <div class="flex">
+                                            <img src="https://laporgub.jatengprov.go.id/captcha/flat?4AhjCtnn" style="height: 100%;" id="img-captcha">
+                                            <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 rounded-r-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600" style="cursor: pointer;" onclick="refreshCaptcha()">
+                                                <i class="fas fa-sync text-red-700"></i>
+                                            </span>
+                                        </div>
+                                        <div class="col-span-2 gap-0 mt-2">
+                                            <input class="pl-2 w-full h-[50px] border-gray-100 border-2 rounded-md" placeholder="Tulis ulang captcha" type="text" id="captcha"
+                                        name="captcha">
+                                        </div>
+                                    </div>
+                                    <div id="captcha-invalid" class="invalid-feedback"></div>
+                                </div>
+
+                                <br><hr>
+
+                                <div class="mt-9 mb-8 px-3 text-sm font-medium">
+                                    <p class="text-gray-900 mb-1">
+                                        Demi kenyamanan dan keamanan anda (Pelapor), data pribadi anda akan kami
+                                        rahasiakan dan apabila mengandung informasi sensitif akan menjadi aduan pribadi
+                                        (hanya dapat diakses melalui akun anda)
+                                    </p>
+                                    <p class="text-gray-900">Untuk lebih lengkap, silahkan cek
+                                        <a href="https://laporgub.jatengprov.go.id/privacy" target="_blank"
+                                           class="text-red-600 hover:text-red-700 font-semibold">Kebijakan
+                                            Privasi</a> dan
+                                        <a href="#" class="text-red-600 hover:text-red-700 font-semibold">Syarat
+                                            Ketentuan</a>
+                                        LaporGub</p>
+                                </div>
+
+                                <button id="btn-step3" type="submit"
+                                        class="w-full py-3 border border-transparent text-sm font-medium rounded-lg text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                                    Kirimkan Aduan
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Topik Hashtags -->
+    <div class="col-span-3 sm:m-0 lg:px-40 lg:pt-60 sm:px-16 sm:pt-28 p-5 mb-8 grid">
+        <span class="block text-red-700 text-lg font-bold font-poppins place-self-center">Aduan - Aduan Masyarakat Jateng</span>
+        <span class="sm:pt-12 pt-4">Topik Aduan Populer 1 Minggu Terakhir</span>
+        <div class="sm:pt-4 pt-3 flex flex-wrap">
+                            <span class="rounded-3xl border border-red-700 text-red-700 font-semibold text-base p-2 m-2">
+                <a href="https://laporgub.jatengprov.go.id/jelajah?search=KELUHAN%20PUNGUTAN%20SEKOLAH%20%28SPP%2FIURAN%2FINFAK%29">#KELUHAN PUNGUTAN SEKOLAH (SPP/IURAN/INFAK)</a>
+            </span>
+                            <span class="rounded-3xl border border-red-700 text-red-700 font-semibold text-base p-2 m-2">
+                <a href="https://laporgub.jatengprov.go.id/jelajah?search=KERUSAKAN%20JALAN%20DESA%20%2F%20KELURAHAN">#KERUSAKAN JALAN DESA / KELURAHAN</a>
+            </span>
+                            <span class="rounded-3xl border border-red-700 text-red-700 font-semibold text-base p-2 m-2">
+                <a href="https://laporgub.jatengprov.go.id/jelajah?search=ADUAN%20SISWA%20TERHADAP%20SEKOLAH">#ADUAN SISWA TERHADAP SEKOLAH</a>
+            </span>
+                            <span class="rounded-3xl border border-red-700 text-red-700 font-semibold text-base p-2 m-2">
+                <a href="https://laporgub.jatengprov.go.id/jelajah?search=KELUHAN%20PEMADAMAN%20LISTRIK">#KELUHAN PEMADAMAN LISTRIK</a>
+            </span>
+                            <span class="rounded-3xl border border-red-700 text-red-700 font-semibold text-base p-2 m-2">
+                <a href="https://laporgub.jatengprov.go.id/jelajah?search=KELUHAN%20GAJI%20KARYAWAN">#KELUHAN GAJI KARYAWAN</a>
+            </span>
+                    </div>
+    </div>
+
+    <!-- Card Aduan -->
+    <div class="col-span-3 flex items-center justify-center 2xl:pt-16 sm:m-0 lg:px-40 lg:pb-24 lg:pt-4 sm:px-10 sm:pt-4 mb-0 grid grid-cols-6 lg:space-y-0 sm:space-y-0 space-y-4 px-8 relative">
+                    <div class="col-span-6 sm:col-span-3 lg:col-span-2 px-3 pt-3">
+                <div
+                    class="card p-3 bg-white sm:min-h-[22em] rounded-lg shadow-sm shadow-slate-500 flex flex-col items-stretch">
+                    <div class="grid content-between sm:min-h-[22em]">
+                        <a href="https://laporgub.jatengprov.go.id/detail/LGMB04201333.html" class="self-auto">
+                            <img src="https://laporgub.jatengprov.go.id/storage/complaint/2023-09-22/23092214054865.jpg" class="object-fill lg:h-48 sm:h-56 mb-3 mx-auto"
+                                 alt="image card">
+                            <p class="text-slate-400 text-sm font-semibold">
+                                KABUPATEN CILACAP, 22 Sep 2023
+                            </p>
+                            <p>
+                                jalan perbatasan desa tambaksari dan desa sidanegara rusak parah, dibenerin/beton cuma depannya saja...
+                            </p>
+                        </a>
+                        <p class="mt-4 text-gray-400 text-sm font-semibold text-center">
+                            <i class="fas fa-bookmark mr-1"></i>
+                            0 Orang Menandai
+                        </p>
+                    </div>
+                </div>
+            </div>
+                    <div class="col-span-6 sm:col-span-3 lg:col-span-2 px-3 pt-3">
+                <div
+                    class="card p-3 bg-white sm:min-h-[22em] rounded-lg shadow-sm shadow-slate-500 flex flex-col items-stretch">
+                    <div class="grid content-between sm:min-h-[22em]">
+                        <a href="https://laporgub.jatengprov.go.id/detail/LGWP01414412.html" class="self-auto">
+                            <img src="https://laporgub.jatengprov.go.id/storage/complaint/2023-09-14/23091412122938.jpg" class="object-fill lg:h-48 sm:h-56 mb-3 mx-auto"
+                                 alt="image card">
+                            <p class="text-slate-400 text-sm font-semibold">
+                                , 14 Sep 2023
+                            </p>
+                            <p>
+                                Pengecatan semprot di lingkungan perumahan warga ,
+
+                            </p>
+                        </a>
+                        <p class="mt-4 text-gray-400 text-sm font-semibold text-center">
+                            <i class="fas fa-bookmark mr-1"></i>
+                            0 Orang Menandai
+                        </p>
+                    </div>
+                </div>
+            </div>
+                    <div class="col-span-6 sm:col-span-3 lg:col-span-2 px-3 pt-3">
+                <div
+                    class="card p-3 bg-white sm:min-h-[22em] rounded-lg shadow-sm shadow-slate-500 flex flex-col items-stretch">
+                    <div class="grid content-between sm:min-h-[22em]">
+                        <a href="https://laporgub.jatengprov.go.id/detail/LGIG63993742.html" class="self-auto">
+                            <img src="https://laporgub.jatengprov.go.id/storage/complaint/2023-10-06/23100611345332.jpg" class="object-fill lg:h-48 sm:h-56 mb-3 mx-auto"
+                                 alt="image card">
+                            <p class="text-slate-400 text-sm font-semibold">
+                                , 06 Oct 2023
+                            </p>
+                            <p>
+            
+                            </p>
+                        </a>
+                        <p class="mt-4 text-gray-400 text-sm font-semibold text-center">
+                            <i class="fas fa-bookmark mr-1"></i>
+                            0 Orang Menandai
+                        </p>
+                    </div>
+                </div>
+            </div>
+        
+        <div class="col-span-6 py-6 place-self-center">
+            <a href="https://laporgub.jatengprov.go.id/jelajah" class="text-red-700 font-semibold">Lihat Aduan Lainnya > </a>
+        </div>
+
+        <div class="absolute bottom-0 sm:bottom-0 left-0 -z-10">
+            <img src="https://laporgub.jatengprov.go.id/img/bg-01.png" class="h-[12rem] sm:h-auto md:h-[42rem] lg:w-full lg:h-auto 2xl:h-auto 2xl:w-full" alt="background image">
+        </div>
+    </div>
+
+        <!-- Menu Footer Section -->
+                <div class="grid grid-cols-8 sm:grid-cols-9 lg:grid-cols-8 py-2 px-8 sm:p-14 font-karla bg-red-700 text-white">
+    <!-- Dibuat oleh -->
+    <div class="col-span-8 sm:col-span-9 lg:col-span-2 ml-2">
+        <a href="https://laporgub.jatengprov.go.id">
+            <div class="my-3 flex">
+                <img src="https://laporgub.jatengprov.go.id/img/LG.png" alt="Logo laporgub" class="h-8 bg-contain">
+                <!-- <img src="https://laporgub.jatengprov.go.id/img/text-logo.png" alt="Logo teks" class="w-32 bg-contain"> -->
+            </div>
+        </a>
+        <a href="https://diskominfo.jatengprov.go.id" target="_blank">
+            <div class="my-3 flex">
+                <img src="https://laporgub.jatengprov.go.id/img/diskominfo.png" alt="Logo Pemprov Jateng" class="w-16 inline-block">
+                <p class="text-sm ml-2 self-center">Dinas Komunikasi dan Informatika </br>Provinsi Jawa Tengah</p>
+            </div>
+        </a>
+    </div>
+
+    <!-- Kanal Aduan -->
+    <div class="col-span-8 sm:col-span-3 lg:col-span-2 ml-2">
+        <p class="text-l font-bold mt-6">KANAL ADUAN</p>
+        <div class="grid grid-cols-1 mt-3">
+            <div class="col-span-1">
+                <a href="https://www.facebook.com/laporgub.jtg" target="_blank">
+                    <div class="my-3 flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 inline-block" fill="#ffff" stroke="currentColor" stroke-width="2" viewBox="0 0 448 512">
+                            <!--! Font Awesome Pro 6.1.1 by @fontawesome  - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                            <path d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z" /></svg>
+                        <p class="text-xs ml-2">LaporGub</p>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/laporgub.jtg" target="_blank">
+                    <div class="my-3 flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 inline-block" fill="#ffff" stroke="currentColor" stroke-width="2" viewBox="0 0 448 512">
+                            <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" /></svg>
+                        <p class="text-xs ml-2">@laporgub.jtg</p>
+                    </div>
+                </a>
+                <a href="https://www.twitter.com/LaporGub_" target="_blank">
+                    <div class="my-3 flex">
+                        
+                        <svg class="w-5 inline-block" fill="#ffff" stroke="currentColor" version="1.1" id="svg5" xmlns:svg="http://www.w3.org/2000/svg"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1668.56 1221.19"
+                            style="enable-background:new 0 0 1668.56 1221.19; margin-left: -0.15rem;" xml:space="preserve">
+                            <g id="layer1" transform="translate(52.390088,-25.058597)">
+                                <path id="path1009" d="M283.94,167.31l386.39,516.64L281.5,1104h87.51l340.42-367.76L984.48,1104h297.8L874.15,558.3l361.92-390.99
+                                    h-87.51l-313.51,338.7l-253.31-338.7H283.94z M412.63,231.77h136.81l604.13,807.76h-136.81L412.63,231.77z"/>
+                            </g>
+                        </svg>
+                        <p class="text-xs ml-1">@LaporGub_</p>
+                    </div>
+                </a>
+                <a href="https://wa.me/628112920200?text=Laporgub%23Nama%23Kabupaten/Kota%23Kecamatan%23Kelurahan%23Keluhan" target="_blank">
+                    <div class="my-3 flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 inline-block" fill="#ffff" stroke="currentColor" stroke-width="2" viewBox="0 0 448 512">
+                            <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" /></svg>
+                        <p class="text-xs ml-2">0811-2920-200</p>
+                    </div>
+                </a>
+                <div class="my-3 flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 inline-block" fill="#ffff" stroke="currentColor" stroke-width="2" viewBox="0 0 512 512">
+                        <path d="M256 32C114.6 32 .0137 125.1 .0137 240c0 49.59 21.39 95 56.99 130.7c-12.5 50.39-54.31 95.3-54.81 95.8C0 468.8-.5938 472.2 .6875 475.2C1.1 478.2 4.813 480 8 480c66.31 0 116-31.8 140.6-51.41C181.3 440.9 217.6 448 256 448C397.4 448 512 354.9 512 240S397.4 32 256 32zM167.3 271.9C163.9 291.1 146.3 304 121.1 304c-4.031 0-8.25-.3125-12.59-1C101.1 301.8 92.81 298.8 85.5 296.1c-8.312-3-14.06-12.66-11.09-20.97S85 261.1 93.38 264.9c6.979 2.498 14.53 5.449 20.88 6.438C125.7 273.1 135 271 135.8 266.4c1.053-5.912-10.84-8.396-24.56-12.34c-12.12-3.531-44.28-12.97-38.63-46c4.062-23.38 27.31-35.91 58-31.09c5.906 .9062 12.44 2.844 18.59 4.969c8.344 2.875 12.78 12 9.906 20.34C156.3 210.7 147.2 215.1 138.8 212.2c-4.344-1.5-8.938-2.938-13.09-3.594c-11.22-1.656-20.72 .4062-21.5 4.906C103.2 219.2 113.6 221.5 124.4 224.6C141.4 229.5 173.1 238.5 167.3 271.9zM320 288c0 8.844-7.156 16-16 16S288 296.8 288 288V240l-19.19 25.59c-6.062 8.062-19.55 8.062-25.62 0L224 240V288c0 8.844-7.156 16-16 16S192 296.8 192 288V192c0-6.875 4.406-12.1 10.94-15.18c6.5-2.094 13.71 .0586 17.87 5.59L256 229.3l35.19-46.93c4.156-5.531 11.4-7.652 17.87-5.59C315.6 179 320 185.1 320 192V288zM439.3 271.9C435.9 291.1 418.3 304 393.1 304c-4.031 0-8.25-.3125-12.59-1c-8.25-1.25-16.56-4.25-23.88-6.906c-8.312-3-14.06-12.66-11.09-20.97s10.59-13.16 18.97-10.19c6.979 2.498 14.53 5.449 20.88 6.438c11.44 1.719 20.78-.375 21.56-4.938c1.053-5.912-10.84-8.396-24.56-12.34c-12.12-3.531-44.28-12.97-38.63-46c4.031-23.38 27.25-35.91 58-31.09c5.906 .9062 12.44 2.844 18.59 4.969c8.344 2.875 12.78 12 9.906 20.34c-2.875 8.344-11.94 12.81-20.34 9.906c-4.344-1.5-8.938-2.938-13.09-3.594c-11.19-1.656-20.72 .4062-21.5 4.906C375.2 219.2 385.6 221.5 396.4 224.6C413.4 229.5 445.1 238.5 439.3 271.9z" /></svg>
+                    <p class="text-xs ml-2">0811-2920-200</p>
+                </div>
+                <a href="https://www.lapor.go.id" target="_blank">
+                    <div class="my-3 flex">
+                        
+                        <img src="https://www.lapor.go.id/favicon-16x16.png" alt="Logo Sp4n Lapor">
+                        <p class="text-xs ml-2">SP4N-LAPOR</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Kontak Kami -->
+    <div class="col-span-8 sm:col-span-3 lg:col-span-2 ml-2">
+        <p class="text-l font-bold mt-6">KONTAK KAMI</p>
+        <div class="grid grid-cols-1 mt-3">
+            <div class="col-span-1">
+                <div class="my-3 flex">
+                    
+                    <img src="https://laporgub.jatengprov.go.id/img/logo.png" alt="Logo LaporGub" width="24px">
+                    <p class="text-xs ml-2">laporgub.jatengprov.go.id</p>
+                </div>
+                <div class="my-3 flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 inline-block" fill="#ffff" stroke="currentColor" stroke-width="2" viewBox="0 0 512 512">
+                        <path d="M511.2 387l-23.25 100.8c-3.266 14.25-15.79 24.22-30.46 24.22C205.2 512 0 306.8 0 54.5c0-14.66 9.969-27.2 24.22-30.45l100.8-23.25C139.7-2.602 154.7 5.018 160.8 18.92l46.52 108.5c5.438 12.78 1.77 27.67-8.98 36.45L144.5 207.1c33.98 69.22 90.26 125.5 159.5 159.5l44.08-53.8c8.688-10.78 23.69-14.51 36.47-8.975l108.5 46.51C506.1 357.2 514.6 372.4 511.2 387z" /></svg>
+                    <p class="text-xs ml-4">(024) 844-1256</p>
+                </div>
+                <div class="my-3 flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 inline-block" fill="#ffff" stroke="currentColor" stroke-width="2" viewBox="0 0 576 512">
+                        <path d="M273.2 311.1C241.1 271.9 167.1 174.6 167.1 120C167.1 53.73 221.7 0 287.1 0C354.3 0 408 53.73 408 120C408 174.6 334.9 271.9 302.8 311.1C295.1 321.6 280.9 321.6 273.2 311.1V311.1zM416 503V200.4C419.5 193.5 422.7 186.7 425.6 179.8C426.1 178.6 426.6 177.4 427.1 176.1L543.1 129.7C558.9 123.4 576 135 576 152V422.8C576 432.6 570 441.4 560.9 445.1L416 503zM15.09 187.3L137.6 138.3C140 152.5 144.9 166.6 150.4 179.8C153.3 186.7 156.5 193.5 160 200.4V451.8L32.91 502.7C17.15 508.1 0 497.4 0 480.4V209.6C0 199.8 5.975 190.1 15.09 187.3H15.09zM384 504.3L191.1 449.4V255C212.5 286.3 234.3 314.6 248.2 331.1C268.7 357.6 307.3 357.6 327.8 331.1C341.7 314.6 363.5 286.3 384 255L384 504.3z" /></svg>
+                    <p class="text-xs ml-4">
+                        Jl. Pahlawan No.9, Mugassari, Semarang Selatan, Kota Semarang, Jawa Tengah 50249<br>
+                        <span class="text-xs text-white"><a href="https://s.id/mapsgubernurjateng" target="_blank">Cek Lokasi di Google Maps</a></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Link Lain -->
+    <div class="col-span-8 sm:col-span-3 lg:col-span-2 ml-2">
+        <p class="text-l font-bold mt-6">LINK LAIN</p>
+        <div class="grid grid-cols-1 mt-3">
+            <div class="col-span-1">
+                <a href="https://laporgub.jatengprov.go.id/privacy">
+                    <div class="my-3 flex">
+                        <p class="text-xs ml-0">
+                            Kebijakan Privasi
+                        </p>
+                    </div>
+                </a>
+                <a href="https://laporgub.jatengprov.go.id/sop">
+                    <div class="my-3 flex">
+                        <p class="text-xs ml-0">
+                            SOP LaporGub
+                        </p>
+                    </div>
+                </a>
+                <a href="https://diskominfo.jatengprov.go.id" target="_blank">
+                    <div class="my-3 flex">
+                        
+                        <p class="text-xs ml-0">
+                            Website Diskominfo Jateng
+                        </p>
+                    </div>
+                </a>
+                <a href="https://jatengprov.go.id" target="_blank">
+                    <div class="my-3 flex">
+                        
+                        <p class="text-xs ml-0">
+                            Jatengprov.go.id
+                        </p>
+                    </div>
+                </a>
+                <div class="my-3 flex">
+                    <a href="https://laporgub.jatengprov.go.id/android" target="_blank">
+                        <div class="my-3 flex">
+                            <img src="https://laporgub.jatengprov.go.id/img/google-play.png" alt="Google Play Store">
+                        </div>
+                    </a>
+                    &nbsp;
+                    <a href="https://laporgub.jatengprov.go.id/ios" target="_blank">
+                        <div class="my-3 flex">
+                            <img src="https://laporgub.jatengprov.go.id/img/appstore.png" alt="App Store">
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        
+    </main>
+
+            <footer class="bg-red-700 flex justify-center py-2 font-karla">
+            <p class="text-white text-xs">Hak Cipta © 2023 Team 5 TRPL Malam 1A</p>
+        </footer>
+    
+    <script src="https://laporgub.jatengprov.go.id/js/app.js"></script>
+    <!-- jQuery -->
+    <script src="https://laporgub.jatengprov.go.id/js/jquery.min.js"></script>
+    <!-- select2 -->
+    <script src="https://laporgub.jatengprov.go.id/plugins/select2/select2.min.js"></script>
+    <!-- stepper -->
+    <script src="https://laporgub.jatengprov.go.id/plugins/stepper/bs-stepper.min.js"></script>
+    <!-- sweetalert -->
+    <script src="https://laporgub.jatengprov.go.id/plugins/sweetalert/sweetalert2.min.js"></script>
+    <!-- Tailwind Components - Flowbite -->
+    <script src="https://laporgub.jatengprov.go.id/js/flowbite.js"></script>
+
+    <script>
+        const burger = document.querySelector("#burger");
+        const menu = document.querySelector("#menu");
+        const body = document.querySelector("#bodyDiv");
+
+        burger.addEventListener('click', () => {
+            if (menu.classList.contains('-left-[300px]')) {
+                // displaying the menu sidebar
+                menu.classList.remove('-left-[300px]');
+                menu.classList.add('left-0');
+                body.classList.add('overflow-hidden');
+            } else {
+                //hiding the menu
+                menu.classList.add('-left-[300px]');
+                menu.classList.remove('left-0');
+                body.classList.remove('overflow-hidden');
+            }
+        })
+
+        function showloader(yes) {
+            if (yes) {
+                $('.bg-loader').show();
+            } else {
+                $('.bg-loader').hide();
+            }
+        }
+
+        $('#dropdownNotificationButton, #dropdownNotificationMobileButton').on("click", function(event) {
+            event.preventDefault();
+            $.ajax({
+                url: "https://laporMas.go.id/frontnotif",
+                type: 'get',
+                success: function(response) {
+                    $('#dropdownNotification').html(response);
+                }
+            });
+        });
+    </script>
+
+        <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FDVB6JR4TJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-FDVB6JR4TJ');
+    </script>
+    
+        <script>
+        var formData = "";
+        var url = "";
+
+        const stepper = new Stepper($('.bs-stepper')[0], {
+            linear: false,
+        });
+
+        $('[name="jenis"]').select2();
+
+        $('[name="lokasi"]').select2({
+            placeholder: "Kota/Kecamatan/Kelurahan",
+            allowClear: true,
+            minimumInputLength: 3,
+            ajax: {
+                url: 'https://lapormas.go.id/complaint/get-location',
+                delay: 500,
+                data: function (params) {
+                    var query = {
+                        search: params.term
+                    }
+                    // Query parameters will be ?search=[term]&page=[page]
+                    return query;
+                },
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (item) {
+                            return {
+                                text: item.name,
+                                id: item.id
+                            }
+                        })
+                    };
+                }
+            }
+        });
+
+        $('#file-upload').change(function () {
+            const files = $(this)[0].files;
+
+            var lampiran = "";
+            var preview = "";
+
+            for (var i = 0, f; file = files[i]; i++) {
+                lampiran += `
+                    <div id="lampiran-img${i}">
+                        <img src="${URL.createObjectURL(file)}" class="object-fill w-full max-h-48" alt="image card">
+                    </div>
+                `;
+                preview += `
+                    <div class="relative col-span-1" id="preview-img${i}">
+                        <img src="${URL.createObjectURL(file)}" class="object-fill w-full max-h-48" alt="image card">
+                        <i class="absolute top-0 right-0 bg-red-500 text-white p-2 rounded hover:bg-red-800 m-2 fas fa-trash text-sm" style="cursor: pointer;" onclick="removeFile(${i})"></i>
+                    </div>
+                `;
+            }
+
+            $('#lampiran-review').html(lampiran);
+            $('#img-aduan').html(preview);
+        });
+
+        function removeFile(index) {
+            $('#lampiran-img' + index).remove();
+            $('#preview-img' + index).remove();
+
+            var dt = new DataTransfer();
+            var input = document.getElementById('file-upload');
+            var {files} = input;
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i]
+                if (index !== i) dt.items.add(file)
+                input.files = dt.files
+            }
+        }
+
+        function submitStep(step)
+        {
+            $("button").prop("disabled", true);
+            showloader(true);
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    $('.invalid-feedback').hide();
+                    if (parseInt(step) === 1) {
+                        $('#aduan-review').html($('#aduan').val())
+                        $('#jenis-review').html($('#jenis').val() == '0' ? 'Private' : 'Public')
+                        $('#lokasi-review').html($('#lokasi').select2('data')[0].text)
+
+                        if ($('#stepper-step2-trigger').length) {
+                            $('#stepper-step2-trigger').removeClass('disabled');
+                        } else {
+                            $('#stepper-step3-trigger').removeClass('disabled');
+                        }
+
+                        $("button").removeAttr('disabled');
+                    }
+
+                    if (parseInt(step) === 2) {
+                        if ($('#pelapor-review').html() === "") {
+                            $('#pelapor-review').html($('#name').val())
+                        }
+
+                        $('#stepper-step3-trigger').removeClass('disabled');
+                        $("button").removeAttr('disabled');
+                    }
+
+                    if (parseInt(step) === 3) {
+                        Swal.fire({
+                            text: "Aduan berhasil dibuat.",
+                            icon: "success",
+                        }).then(function () {
+                            window.location.href = "https://laporMas.go.id/aduanku";
+                        });
+                    }
+
+                    stepper.next()
+                },
+                error: function (response) {
+                    let resJson = response.responseJSON;
+                    if (typeof resJson.error !== 'undefined') {
+                        let message = resJson.error;
+                        console.log(message);
+
+                        if (message === null) {
+                            Swal.fire({
+                                text: resJson.message,
+                                icon: "error",
+                            })
+                        } else if (typeof message === 'object') {
+                            messageKeys = Object.keys(message);
+                            $('.invalid-feedback').hide();
+                            messageKeys.forEach(element => {
+                                var origElement = element;
+                                element = element.replace('.0', '').replace('.1', '').replace('.2', '');
+                                $('#' + element).addClass('is-invalid');
+                                $('#' + element + '-invalid').show();
+                                $('#' + element + '-invalid').html(message[origElement][0]);
+                            });
+                            // $('#geolocation').show();
+                        }
+                    }
+                    $("button").removeAttr('disabled');
+                },
+                complete: function (response) {
+                    showloader(false);
+                }
+            });
+        }
+
+        $('#form-step1').on('submit', function (e) {
+            e.preventDefault();
+            formData = new FormData($('#form-step1')[0]);
+            for (const f in FILES) {
+                formData.append('file-upload[]', FILES[f]);
+            }
+            url = "https://laporMas.go.id/complaint/create-step-1";
+            submitStep(1);
+        });
+
+        $('#form-step2').on('submit', function (e) {
+            e.preventDefault();
+            formData = new FormData($('#form-step2')[0]);
+            url = "https://laporMas.go.id/complaint/create-step-2";
+            submitStep(2);
+        });
+
+        $('#form-step3').on('submit', function (e) {
+            e.preventDefault();
+            formData = new FormData($('#form-step1')[0]);
+            for (const f in FILES) {
+                formData.append('file-upload[]', FILES[f]);
+            }
+            var otherData2 = $('#form-step2').serializeArray();
+            $.each(otherData2, function (key, input) {
+                if (input.name != '_token') {
+                    formData.append(input.name, input.value);
+                }
+            });
+            var otherData3 = $('#form-step3').serializeArray();
+            $.each(otherData3, function (key, input) {
+                if (input.name != '_token') {
+                    formData.append(input.name, input.value);
+                }
+            });
+            url = "https://laporMas.go.id/complaint/create-step-3";
+            submitStep(3);
+        });
+
+        $('#send-otp').on('click', function (e) {
+            e.preventDefault();
+            showloader(true);
+
+            $.ajax({
+                type: "POST",
+                url: "https://laporMas.go.id/complaint/send-otp",
+                data: {
+                    "_token": "JUXRrTY0HxEpqIhMHqvZKfBNvKvoKIYuRPeXsTiw",
+                    "phone": $('#phone').val()
+                },
+                success: function (response) {
+                    Swal.fire({
+                        text: "Silahkan masukan kode OTP yang sudah dikirim ke Nomor Handphone.",
+                        icon: "success"
+                    })
+                },
+                error: function (response) {
+                    let resJson = response.responseJSON;
+                    if (typeof resJson.error !== 'undefined') {
+                        let message = resJson.message;
+                        console.log(message)
+
+                        Swal.fire({
+                            text: message,
+                            icon: "error",
+                        });
+                    }
+                },
+                complete: function (response) {
+                    showloader(false);
+                }
+            });
+        });
+
+        
+        const imageTempl = document.getElementById("image-template"),
+            empty = document.getElementById("empty"),
+            addImage = document.getElementById("add-image"),
+            gallery = document.getElementById("gallery"),
+            overlay = document.getElementById("overlay");
+
+        // use to store pre selected files
+        let FILES = {};
+
+        const updatePreview = () => {
+            let lampiran = '';
+            for (const f in FILES) {
+                lampiran += `<div id="lampiran-img${f}" class="w-1/3 h-28">
+                        <img alt="upload preview" id="lampiran-img${f}" src="${URL.createObjectURL(FILES[f])}"
+                     class="img-preview w-full h-full sticky object-cover rounded-md bg-fixed"/>
+                    </div>`;
+            }
+            $('#lampiran-review').html(lampiran);
+        }
+
+        // check if file is of type image and prepend the initialied
+        // template to the target element
+        function addFile(target, file) {
+            if (gallery.children.length === 4 && !document.querySelector("#gallery #button")) {
+                return;
+            }
+
+            const isImage = file.type.match("image.*"),
+                objectURL = URL.createObjectURL(file);
+
+            const clone = imageTempl.content.cloneNode(true);
+            const add = addImage.content.cloneNode(true);
+
+            clone.querySelector("h1").textContent = file.name;
+            clone.querySelector("li").id = objectURL;
+            clone.querySelector(".delete").dataset.target = objectURL;
+            clone.querySelector(".size").textContent =
+                file.size > 1024
+                    ? file.size > 1048576
+                        ? Math.round(file.size / 1048576) + "mb"
+                        : Math.round(file.size / 1024) + "kb"
+                    : file.size + "b";
+
+            isImage &&
+            Object.assign(clone.querySelector("img"), {
+                src: objectURL,
+                alt: file.name
+            });
+
+            empty.classList.add("hidden");
+            target.prepend(clone);
+
+            if (gallery.children.length === 2) {
+                target.append(add);
+                document.getElementById("button").onclick = (e) => {
+                    e.preventDefault();
+                    hidden.click()
+                };
+                gallery.classList.remove("cursor-pointer");
+            }
+
+            if (gallery.children.length === 5) {
+                document.querySelector("#gallery #button").remove();
+            }
+
+            FILES[objectURL] = file;
+            updatePreview();
+        }
+
+        // click the hidden input of type file if the visible button is clicked
+        // and capture the selected files
+        const hidden = document.getElementById("hidden-input");
+        hidden.onchange = (e) => {
+            for (const file of e.target.files) {
+                addFile(gallery, file);
+            }
+        };
+
+        // use to check if a file is being dragged
+        const hasFiles = ({dataTransfer: {types = []}}) =>
+            types.indexOf("Files") > -1;
+
+        // use to drag dragenter and dragleave events.
+        // this is to know if the outermost parent is dragged over
+        // without issues due to drag events on its children
+        let counter = 0;
+
+        // reset counter and append file to gallery when file is dropped
+        function dropHandler(ev) {
+            ev.preventDefault();
+            for (const file of ev.dataTransfer.files) {
+                addFile(gallery, file);
+                overlay.classList.remove("draggedover");
+                counter = 0;
+            }
+        }
+
+        // only react to actual files being dragged
+        function dragEnterHandler(e) {
+            e.preventDefault();
+            if (!hasFiles(e)) {
+                return;
+            }
+            ++counter && overlay.classList.add("draggedover");
+        }
+
+        function dragLeaveHandler(e) {
+            1 > --counter && overlay.classList.remove("draggedover");
+        }
+
+        function dragOverHandler(e) {
+            if (hasFiles(e)) {
+                e.preventDefault();
+            }
+        }
+
+        // event delegation to caputre delete events
+        // fron the waste buckets in the file preview cards
+        gallery.onclick = ({target}) => {
+
+            if (target.classList.contains("delete")) {
+                const ou = target.dataset.target;
+                document.getElementById(ou).remove();
+                delete FILES[ou];
+                if (gallery.children.length === 2) {
+                    document.querySelector("#gallery #button").remove();
+                    empty.classList.remove("hidden");
+                    gallery.classList.add("cursor-pointer");
+                }
+
+                if (gallery.children.length === 3 && !document.querySelector("#gallery #button")) {
+                    const add = addImage.content.cloneNode(true);
+                    gallery.append(add);
+                    document.getElementById("button").onclick = (e) => {
+                        e.preventDefault();
+                        hidden.click();
+                    }
+                }
+
+                hidden.value = null;
+                updatePreview();
+            } else if (gallery.children.length === 1) {
+                hidden.click();
+            }
+        };
+
+        var geolocation = document.getElementById("geolocation");
+
+        function getlocation()
+        {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                geolocation.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position)
+        {
+            geolocation.innerHTML = "The current location is (" + "Latitude: " + position.coords.latitude + ", " + "Longitude: " + position.coords.longitude + ")";
+            $('[name="latitude"]').val(position.coords.latitude);
+            $('[name="longitude"]').val(position.coords.longitude);
+        }
+
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                geolocation.innerHTML = "User denied the request for Geolocation."
+                break;
+                case error.POSITION_UNAVAILABLE:
+                geolocation.innerHTML = "Location information is unavailable."
+                break;
+                case error.TIMEOUT:
+                geolocation.innerHTML = "The request to get user location timed out."
+                break;
+                case error.UNKNOWN_ERROR:
+                geolocation.innerHTML = "An unknown error occurred."
+                break;
+            }
+        }
+
+        function refreshCaptcha()
+        {
+            $.get("https://laporMas.go.id/refresh-captcha", function(data) {
+                $('#img-captcha').attr('src', data);
+            });
+        }
+    </script>
+
+    <div class="bg-loader">
+        <div class="loader"></div>
+    </div>
+</body>
+</html>
